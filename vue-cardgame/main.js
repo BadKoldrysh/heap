@@ -2,7 +2,7 @@ new Vue({
     name: 'cardgame',
     el: '#app',
     template: `<div id="#app">
-        Hello World!
+        <top-bar :turn="turn" :current-player-index="currentPlayerIndex" :players="players" />
     </div>`,
     data: state,
 
