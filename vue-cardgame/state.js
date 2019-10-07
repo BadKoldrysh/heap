@@ -9,7 +9,8 @@ let currentPlayingCard = null
 let state = {
   // World
   worldRatio: getWorldRatio(),
-  
+  // UI
+  activeOverlay: null,
   turn: 1,
   players: [
     {
