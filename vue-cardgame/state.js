@@ -19,6 +19,6 @@ let state = {
       name: 'Jacob the Funny'
     }
   ],
+  testHand: [],
   currentPlayerIndex: Math.round(Math.random()),
-  
 }

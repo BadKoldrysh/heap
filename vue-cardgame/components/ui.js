@@ -32,5 +32,14 @@ Vue.component('card', {
             this.$emit('play');
         }
     }
+});
+
+Vue.component('hand', {
+    template: `<div class="hand">
+                    <div class="wrapper">
+                        <card v-for="card of cards" :def="card.def" v-bind:key="card.id" />
+                    </div>
+                </div>`,
+    props: ['cards'],
 
 });
