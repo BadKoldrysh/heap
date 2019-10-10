@@ -9,17 +9,35 @@ let currentPlayingCard = null
 let state = {
   // World
   worldRatio: getWorldRatio(),
-  // UI
-  activeOverlay: null,
   turn: 1,
   players: [
     {
-      name: 'Julie the Rockstar'
+      name: 'Julie the Rockstar',
+      food: 10,
+      health: 10,
+      // is skipping is next turn
+      skipTurn: false,
+      // skipped turn last time
+      skippedTurn: false,
+      hand: [],
+      lastPlayedCardId: null,
+      dead: false,
     },
     {
-      name: 'Jacob the Funny'
+      name: 'Jacob the Funny',
+      food: 10,
+      health: 10,
+      // is skipping is next turn
+      skipTurn: false,
+      // skipped turn last time
+      skippedTurn: false,
+      hand: [],
+      lastPlayedCardId: null,
+      dead: false,
     }
   ],
   testHand: [],
   currentPlayerIndex: Math.round(Math.random()),
+  // UI
+  activeOverlay: null,
 }
