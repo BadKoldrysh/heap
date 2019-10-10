@@ -91,7 +91,7 @@ Vue.component('overlay-content-last-play', {
     },
 });
 
-Vue.component('player-result', {
+Vue.component('overlay-content-player-result', {
     template: `<div class="player-result" :class="result">
                 <span class="name">{{ player.name }}</span>
                 <span class="result">{{ result }}</span>
@@ -104,7 +104,7 @@ Vue.component('player-result', {
     },
 });
 
-Vue.component('game-over', {
+Vue.component('overlay-content-game-over', {
     template: `<div>
                 <div class="big">Game Over</div>
                 <player-result v-for="player in players" :player="player" />

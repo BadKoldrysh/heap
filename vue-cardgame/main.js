@@ -7,8 +7,16 @@ new Vue({
         <transition name="hand">
             <hand :cards="testHand" v-if="!activeOverlay" @card-play="testPlayCard" />
         </transition>
-        <overlay>
-            Hello World!
+        <overlay v-if="activeOverlay">
+            <overlay-content-player-turn
+                v-if="activeOverlay === 'player-turn'"
+                :player="currentPlayer" />
+            <overlay-content-last-play
+                v-else-if="activeOverlay === 'last-play'"
+                :opponent="currentOpponent" />
+            <overlay-content-game-over
+                v-else-if="activeOverlay === 'game-over'" 
+                :players="players" />
         </overlay>
     </div>`,
     data: state,
