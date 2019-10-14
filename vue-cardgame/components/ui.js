@@ -111,3 +111,18 @@ Vue.component('overlay-content-game-over', {
             </div>`,
     props: ['players'],
 });
+
+Vue.component('bubble', {
+    template: `<div class="stat-bubble" :class="type + '-bubble'" :style="bubbleStyle">
+                <img :src="'svg/' + type + '-bubble.svg'" />
+                <div class="counter">{{ value }}</div>
+            </div>`,
+    props: ['type', 'value', 'ratio'],
+    computed: {
+        bubbleStyle() {
+            return {
+                top: (this.ratio * 220 + 40) * StaticRange.worldRatio + 'px',
+            }
+        },
+    },
+});
