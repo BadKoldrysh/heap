@@ -12,12 +12,12 @@ Vue.component('castle-banners', {
         <!-- Food -->
         <img class="food-icon" src="svg/food-icon.svg" />
         <bubble type="food" :value="player.food" :ratio="foodRatio" />
-        <!-- Banner bar here -->
-
+        <banner-bar class="food-bar" color="#288339" :ratio="foodRatio" />
+        
         <!-- Health -->
         <img class="health-icon" src="svg/health-icon.svg" />
         <bubble type="health" :value="player.health" :ratio="healthRatio" />
-        <!-- Banner bar here -->
+        <banner-bar class="health-bar" color="#9b2e2e" :ratio="healthRatio" />
     </div>`,
     props: ['player'],
     computes: {
@@ -28,4 +28,29 @@ Vue.component('castle-banners', {
             return this.player.health / maxHealth;
         },
     }
+});
+
+Vue.component('bubble', {
+    template: `<div class="stat-bubble" :class="type + '-bubble'" :style="bubbleStyle">
+                <img :src="'svg/' + type + '-bubble.svg'" />
+                <div class="counter">{{ value }}</div>
+            </div>`,
+    props: ['type', 'value', 'ratio'],
+    computed: {
+        bubbleStyle() {
+            return {
+                top: (this.ratio * 220 + 40) * StaticRange.worldRatio + 'px',
+            }
+        },
+    },
+});
+
+Vue.component('banner-bar', {
+    template: '#banner',
+    props: ['color', 'ratio'],
+    computed: {
+        targetHeight() {
+            return 220 * this.ratio + 40;
+        },
+    },
 });
