@@ -20,7 +20,7 @@ Vue.component('castle-banners', {
         <banner-bar class="health-bar" color="#9b2e2e" :ratio="healthRatio" />
     </div>`,
     props: ['player'],
-    computes: {
+    computed: {
         foodRatio() {
             return this.player.food / maxFood;
         },
@@ -51,6 +51,27 @@ Vue.component('banner-bar', {
     computed: {
         targetHeight() {
             return 220 * this.ratio + 40;
+        }
+    },
+    data() {
+        return {
+            height: 0,
+        };
+    },
+    created() {
+        this.height = this.targetHeight;
+    },
+    watch: {
+        targetHeight(newValue, oldValue) {
+            const vm = this;
+            // with using TWEEN.js library
+            new TWEEN.Tween({ value: oldValue })
+                .easing(TWEEN.Easing.Cubic.InOut)
+                .to({value: newValue}, 500)
+                .onUpdate(function() {
+                    vm.height = this.value.toFixed(0);
+                })
+                .start();
         },
     },
 });

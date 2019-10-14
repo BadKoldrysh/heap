@@ -5,7 +5,7 @@ new Vue({
     template: `<div id="#app">
         <top-bar :turn="turn" :current-player-index="currentPlayerIndex" :players="players" />
         <div class="world">
-            <castle v-for="(player, index) in players" :player="player" :index="index" />
+            <castle v-for="(player, index) in players" :player="player" :index="index" v-bind:key="player.name" />
             <div class="land" />
         </div>
         <transition name="hand">
@@ -70,3 +70,11 @@ new Vue({
 window.addEventListener('resize', () => {
     state.worldRatio = getWorldRatio();
 });
+
+// Tween.js
+requestAnimationFrame(animate);
+
+function animate(time) {
+    requestAnimationFrame(animate);
+    TWEEN.update(time);
+}
