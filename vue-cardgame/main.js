@@ -12,7 +12,7 @@ new Vue({
             </div>
         </div>
         <transition name="hand">
-            <hand :cards="testHand" v-if="!activeOverlay" @card-play="testPlayCard" />
+            <hand :cards="currentHand" v-if="!activeOverlay" @card-play="testPlayCard" />
         </transition>
         <transition name="zoom">
             <overlay v-if="activeOverlay" :key="activeOverlay">
@@ -65,7 +65,7 @@ new Vue({
         },
     },
     created() {
-        this.testHand = this.createTestHand();
+        
     },
     mounted() {
         beginGame();

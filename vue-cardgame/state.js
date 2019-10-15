@@ -50,6 +50,9 @@ let state = {
   },
   get currentOpponent() {
     return state.players[state.currentOpponentId];
+  },
+  get currentHand() {
+    return state.currentPlayer.hand;
   }
 }
 
