@@ -125,9 +125,40 @@ function applyCard() {
 }
 
 function nextTurn() {
-
+    state.turn++;
+    state.currentPlayerIndex = state.currentOpponentId;
+    state.activeOverlay = 'player-turn';
 }
 
 function endGame() {
 
+}
+
+function newTurn() {
+    state.activeOverlay = null;
+    if (state.currentPlayer.skipTurn) {
+        skipTurn();
+    } else {
+        startTurn();
+    }
+}
+
+function skipTurn() {
+    state.currentPlayer.skippedTurn = true;
+    state.currentPlayer.skipTurn = false;
+    nextTurn();
+}
+
+function startTurn() {
+    state.currentPlayer.skippedTurn = false;
+    // If both player already had a first turn
+    if (state.turn > 2) {
+        // Draw new card
+        setTimeout(() => {
+            state.currentPlayer.hand.push(drawCard());
+            state.canPlay = true;
+        }, 800);
+    } else {
+        state.canPlay = true;
+    }
 }
