@@ -67,6 +67,9 @@ new Vue({
     created() {
         this.testHand = this.createTestHand();
     },
+    mounted() {
+        beginGame();
+    },
 });
 
 // Window resize handling
@@ -80,4 +83,8 @@ requestAnimationFrame(animate);
 function animate(time) {
     requestAnimationFrame(animate);
     TWEEN.update(time);
+}
+
+function beginGame() {
+    state.players.forEach(drawInitialHand());
 }

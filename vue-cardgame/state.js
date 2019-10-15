@@ -36,6 +36,8 @@ let state = {
       dead: false,
     }
   ],
+  drawPile: pile,
+  discardPile: {},
   testHand: [],
   currentPlayerIndex: Math.round(Math.random()),
   // UI
