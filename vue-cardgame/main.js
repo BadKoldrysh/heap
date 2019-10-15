@@ -64,7 +64,7 @@ new Vue({
             playCard(card);
         },
         handleCardLeaveEnd() {
-            console.log('card leave end');
+            applyCard();
         },
     },
     created() {
@@ -104,4 +104,30 @@ function playCard() {
         // Add the card to the discard pile
         addCardToPile(state.discardPile, card.id);  
     }
+}
+
+function applyCard() {
+    const card = currentPlayingCard;
+
+    applyCardEffect(card);
+
+    // wait a bit for the player to see what's going on
+    setTimeout(() => {
+        // Check if the players are dead
+        state.players.forEach(checkPlayerLost);
+
+        if (isOnePlayerDead()) {
+            endGame();
+        } else {
+            nextTurn();
+        }
+    }, 700);
+}
+
+function nextTurn() {
+
+}
+
+function endGame() {
+
 }
