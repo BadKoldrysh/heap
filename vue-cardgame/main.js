@@ -2,7 +2,7 @@ new Vue({
     name: 'cardgame',
     el: '#app',
     // we have @play from child element
-    template: `<div id="#app">
+    template: `<div id="#app" :class="cssClass">
         <top-bar :turn="turn" :current-player-index="currentPlayerIndex" :players="players" />
         <div class="world">
             <castle v-for="(player, index) in players" :player="player" :index="index" v-bind:key="player.name" />
@@ -12,7 +12,7 @@ new Vue({
             </div>
         </div>
         <transition name="hand">
-            <hand :cards="currentHand" v-if="!activeOverlay" @card-play="testPlayCard" />
+            <hand :cards="currentHand" v-if="!activeOverlay" @card-play="handlePlayCard" @card-leave-end="handleCardLeaveEnd" />
         </transition>
         <transition name="zoom">
             <overlay v-if="activeOverlay" :key="activeOverlay">
@@ -27,9 +27,11 @@ new Vue({
     </div>`,
     data: state,
     computed: {
-        testCard() {
-            return cards.fireball;
-        }
+        cssClass() {
+            return {
+                'can-play': this.canPlay,
+            };
+        },
     },
     methods: {
         createTestHand() {
@@ -58,10 +60,11 @@ new Vue({
                 def: cards[randomId],
             };
         },
-        testPlayCard(card) {
-            // Remove the card from player hand
-            const index = this.testHand.indexOf(card);
-            this.testHand.splice(index, 1);
+        handlePlayCard(card) {
+            playCard(card);
+        },
+        handleCardLeaveEnd() {
+            console.log('card leave end');
         },
     },
     created() {
@@ -87,4 +90,18 @@ function animate(time) {
 
 function beginGame() {
     state.players.forEach(drawInitialHand());
+}
+
+function playCard() {
+    if (state.canPlay) {
+        state.canPlay = false;
+        currentPlayingCard = card;
+
+        // Remove the card from player hand
+        const index = state.currentPlayer.hand.indexOf(card);
+        state.currentPlayer.hand.splice(index, 1);
+
+        // Add the card to the discard pile
+        addCardToPile(state.discardPile, card.id);  
+    }
 }

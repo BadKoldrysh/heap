@@ -42,6 +42,7 @@ let state = {
   currentPlayerIndex: Math.round(Math.random()),
   // UI
   activeOverlay: null,
+  canPlay: false,
   get currentPlayer() {
     return state.players[state.currentPlayerIndex];
   },
