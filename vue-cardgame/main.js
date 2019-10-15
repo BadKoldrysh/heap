@@ -33,33 +33,7 @@ new Vue({
             };
         },
     },
-    methods: {
-        createTestHand() {
-            const cards = [];
-            // Get the possible ids
-            const ids = Object.keys(cards);
-
-            // Draw 5 cards
-            for (let i = 0; i < 5; i++) {
-                cards.push(this.testDrawCard());
-            }
-        
-            return cards;
-        },
-        testDrawCard() {
-            // Choose a card at random with the ids
-            const ids = Object.keys(cards);
-            const randomId = ids[Math.floor(Math.random() * ids.length)];
-            // Return a new card with this destination
-            return {
-                // Unique id for the card
-                uid: cardUid++,
-                // Id of the destination
-                id: randomId,
-                // Definition object
-                def: cards[randomId],
-            };
-        },
+    methods: {  
         handlePlayCard(card) {
             playCard(card);
         },
@@ -69,9 +43,6 @@ new Vue({
         handleOverlayClose() {
             overlayCloseHandlers[this.activeOverlay]();
         },
-    },
-    created() {
-        
     },
     mounted() {
         beginGame();
@@ -91,11 +62,15 @@ function animate(time) {
     TWEEN.update(time);
 }
 
+// Gameplay
+
+state.activeOverlay = 'player-turn';
+
 function beginGame() {
     state.players.forEach(drawInitialHand);
 }
 
-function playCard() {
+function playCard(card) {
     if (state.canPlay) {
         state.canPlay = false;
         currentPlayingCard = card;
@@ -105,7 +80,7 @@ function playCard() {
         state.currentPlayer.hand.splice(index, 1);
 
         // Add the card to the discard pile
-        addCardToPile(state.discardPile, card.id);  
+        addCardToPile(state.discardPile, card.id);
     }
 }
 
@@ -167,17 +142,17 @@ function startTurn() {
 }
 
 var overlayCloseHandlers = {
-    'player-turn' () {
+    'player-turn'() {
         if (state.turn > 1) {
             state.activeOverlay = 'last-play';
         } else {
             newTurn();
         }
     },
-    'last-play' () {
+    'last-play'() {
         newTurn();
     },
-    'game-over' () {
+    'game-over'() {
         // Reload the game
         document.location.reload();
     }
