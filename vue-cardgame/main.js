@@ -15,7 +15,7 @@ new Vue({
             <hand :cards="currentHand" v-if="!activeOverlay" @card-play="handlePlayCard" @card-leave-end="handleCardLeaveEnd" />
         </transition>
         <transition name="zoom">
-            <overlay v-if="activeOverlay" :key="activeOverlay">
+            <overlay v-if="activeOverlay" :key="activeOverlay" @close="handleOverlayClose">
                 <component :is="'overlay-content-' + activeOverlay"
                             :player="currentPlayer" :opponent="currentOpponent"
                             :players="players" />
@@ -66,6 +66,9 @@ new Vue({
         handleCardLeaveEnd() {
             applyCard();
         },
+        handleOverlayClose() {
+            overlayCloseHandlers[this.activeOverlay]();
+        },
     },
     created() {
         
@@ -89,7 +92,7 @@ function animate(time) {
 }
 
 function beginGame() {
-    state.players.forEach(drawInitialHand());
+    state.players.forEach(drawInitialHand);
 }
 
 function playCard() {
@@ -131,7 +134,7 @@ function nextTurn() {
 }
 
 function endGame() {
-
+    state.activeOverlay = 'game-over';
 }
 
 function newTurn() {
@@ -160,5 +163,22 @@ function startTurn() {
         }, 800);
     } else {
         state.canPlay = true;
+    }
+}
+
+var overlayCloseHandlers = {
+    'player-turn' () {
+        if (state.turn > 1) {
+            state.activeOverlay = 'last-play';
+        } else {
+            newTurn();
+        }
+    },
+    'last-play' () {
+        newTurn();
+    },
+    'game-over' () {
+        // Reload the game
+        document.location.reload();
     }
 }
