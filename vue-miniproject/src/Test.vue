@@ -21,6 +21,13 @@ export default {
             ]
         };
     },
+    render(h) {
+        const itemClass = 'movie';
+        return <ul class='movies'>
+                {this.movies.map(movie => 
+                    <li class={ itemClass }>{ movie.title }</li>)}
+            </ul>
+    },
 }
 </script>
 
