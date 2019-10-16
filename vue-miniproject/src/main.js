@@ -1,10 +1,7 @@
 import Vue from 'vue';
+import Test from './Test.vue';
 
 new Vue({
     el: '#app',
-    render: h => h('div', {'class': 'movies'}, [
-        h('li', {'class': 'movie'}, 'Star Wars'),
-        h('li', {'class': 'movie'}, 'The Godfather'),
-        h('li', {'class': 'movie'}, 'Blade Runner'),
-    ]), 
+    ...Test, 
 });
