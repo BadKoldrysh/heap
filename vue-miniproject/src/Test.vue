@@ -35,4 +35,19 @@ export default {
 p {
     color: grey;
 }
+
+.movies {
+    list-style: none;
+    padding: 12px;
+    background: rgba(0, 250, 0, .1);
+    border-radius: 3px;
+}
+</style>
+
+<style scoped>
+.movie:not(:last-child) {
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    border-bottom: solid 1px rgba(0, 0, 0, .1);
+}
 </style>

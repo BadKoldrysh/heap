@@ -26,6 +26,11 @@ npm outdated
 # instal pug packages
 # Pug - library for transform pug language to html (simlifying HTML)
 npm install --save-dev pug pug-loader
+
+# install CSS preproccessors
+npm install --save-dev node-sass sass-loader
+npm install --save-dev less less-loader
+npm install --save-dev stylus stylus-loader
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
