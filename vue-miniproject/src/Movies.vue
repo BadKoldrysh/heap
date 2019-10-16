@@ -9,7 +9,7 @@ import Movie from './Movie.vue';
 
 export default {
     components: {
-        Movie,
+        Movie
     },
     data() {
         return {

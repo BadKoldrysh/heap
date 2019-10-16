@@ -5,5 +5,9 @@ import Movies from './Movies.vue';
 new Vue({
     el: '#app',
     // ...Test,
-    ...Movies, 
+    
+     // JSX style when we not need 'components:'
+     render(h) {
+        return <Movies />;
+    }, 
 });
