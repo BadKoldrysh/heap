@@ -1,8 +1,12 @@
-<template>
-    <div>
-        <p>{{ message }}</p>
-        <input type="text" v-model="message" />
-    </div>
+<template lang="pug">
+div
+    p {{ message }}
+    input(type='text', v-model='message')
+    ul.movies
+        li.movie Star Wars
+        li.movie The Godfather
+        li.movie Blade Runner
+
 </template>
 
 <script>
