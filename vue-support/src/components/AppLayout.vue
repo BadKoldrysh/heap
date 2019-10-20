@@ -8,6 +8,7 @@
         </header>
 
         <NavMenu />
+        <BlankNavMenu />
         <!-- Special component by vue-router -->
         <router-view />
     </div>
@@ -15,9 +16,11 @@
 
 <script>
 import NavMenu from './NavMenu.vue';
+import BlankNavMenu from './BlankNavMenu.vue';
 export default {
     components: {
         NavMenu,
+        BlankNavMenu,
     },
 };
 </script>
