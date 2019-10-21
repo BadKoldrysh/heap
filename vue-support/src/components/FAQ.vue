@@ -2,6 +2,8 @@
   <main class="faq">
     <h1>Frequently Asked Questions</h1>
 
+    <Loading v-if="loading" />
+
     <div class="error" v-if="error">Can't load the question</div>
 
     <section class="list">
@@ -19,9 +21,11 @@ export default {
         return {
             questions: [],
             error: null,
+            loading: false,
         };
     },
     async created() {
+        this.loading = true;
         try {
             const response = await fetch('http://localhost:3000/questions/');
             if (response.ok) {
@@ -32,6 +36,7 @@ export default {
         } catch (e) {
             this.error = e;
         }
+        this.loading = false;
     }
 }
 </script>
