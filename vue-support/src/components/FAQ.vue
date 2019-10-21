@@ -1,18 +1,16 @@
 <template>
-    <main class="faq">
-        <h1>Frequently Asked Questions</h1>
-    
-        <div class="error" v-if="error">
-            Can't load the question
-        </div>
+  <main class="faq">
+    <h1>Frequently Asked Questions</h1>
 
-        <section class="list">
-            <article v-for="question of questions" :key="question.title">
-                <h2 v-html="question.title"></h2>
-                <p v-html="question.content"></p>
-            </article>
-        </section>
-    </main>
+    <div class="error" v-if="error">Can't load the question</div>
+
+    <section class="list">
+      <article v-for="question of questions" :key="question._id">
+        <h2 v-html="question.title"></h2>
+        <p v-html="question.content"></p>
+      </article>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -23,8 +21,17 @@ export default {
             error: null,
         };
     },
-    created() {
-        // fetch here
+    async created() {
+        try {
+            const response = await fetch('http://localhost:3000/questions/');
+            if (response.ok) {
+                this.questions = await response.json();
+            } else {
+                throw new Error('error');
+            }
+        } catch (e) {
+            this.error = e;
+        }
     }
 }
 </script>
