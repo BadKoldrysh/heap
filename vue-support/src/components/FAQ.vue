@@ -16,22 +16,27 @@
 </template>
 
 <script>
+import RemoteData from '../mixins/RemoteData';
+
 export default {
-    data() {
-        return {
-            questions: [],
-            error: null,
-            loading: false,
-        };
-    },
-    async created() {
-        this.loading = true;
-        try {
-            this.questions = await this.$fetch('questions');
-        } catch (e) {
-            this.error = e;
-        }
-        this.loading = false;
-    }
+  mixins: [
+    RemoteData,
+  ],
+  data() {
+      return {
+          questions: [],
+          error: null,
+          loading: false,
+      };
+  },
+  async created() {
+      this.loading = true;
+      try {
+          this.questions = await this.$fetch('questions');
+      } catch (e) {
+          this.error = e;
+      }
+      this.loading = false;
+  }
 }
 </script>
