@@ -6,7 +6,7 @@ import './global-components';
 import VueFetch from './plugins/fetch';
 
 Vue.use(VueFetch, {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3000/',
 });
 
 new Vue({
