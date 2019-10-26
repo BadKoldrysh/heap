@@ -7,6 +7,7 @@ import Author from './components/Author.vue';
 import BlankA from './components/BlankA.vue';
 import BlankB from './components/BlankB.vue';
 import BlankC from './components/BlankC.vue';
+import Login from './components/Login.vue';
 
 // Install the plugin vue-router
 // for, obviously, routing between different pages
@@ -14,11 +15,12 @@ Vue.use(VueRouter);
 
 const routes = [
     { path: '/', name: 'home', component: Home },
-    { path: '/faq', name: 'faq', component: FAQ},
-    { path: '/author', name: 'author', component: Author},
-    { path: '/blank-a', name: 'blank-a', component: BlankA},
-    { path: '/blank-b', name: 'blank-b', component: BlankB},
-    { path: '/blank-c', name: 'blank-c', component: BlankC},
+    { path: '/faq', name: 'faq', component: FAQ },
+    { path: '/author', name: 'author', component: Author },
+    { path: '/blank-a', name: 'blank-a', component: BlankA },
+    { path: '/blank-b', name: 'blank-b', component: BlankB },
+    { path: '/blank-c', name: 'blank-c', component: BlankC },
+    { path: '/login', name: 'login', component: Login }
 ];
 
 const router = new VueRouter({
