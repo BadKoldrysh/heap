@@ -12,6 +12,7 @@ Vue.use(VueFetch, {
 
 new Vue({
     el: '#app',
+    data: state,
     render: h => h(AppLayout),
     // Provide the router to the app
     router,
