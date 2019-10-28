@@ -22,7 +22,7 @@ const routes = [
     { path: '/blank-a', name: 'blank-a', component: BlankA },
     { path: '/blank-b', name: 'blank-b', component: BlankB },
     { path: '/blank-c', name: 'blank-c', component: BlankC },
-    { path: '/login', name: 'login', component: Login },
+    { path: '/login', name: 'login', component: Login, meta: {guest: true} },
     { path: '/tickets', name: 'tickets', component: TicketsLayout, meta: {private: true} },
 ];
 
@@ -33,8 +33,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    // TODO
-    console.log('to', to.name);
+    // console.log('to', to.name);
 
     if (to.meta.private && !state.user) {
         next({
@@ -42,6 +41,13 @@ router.beforeEach((to, from, next) => {
             params: {
                 wantedRoute: to.fullPath,
             },
+        });
+        return;
+    }
+
+    if (to.meta.guest && state.user) {
+        next({
+            name: 'home',
         });
         return;
     }
