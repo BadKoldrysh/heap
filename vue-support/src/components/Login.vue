@@ -4,8 +4,8 @@
         <form>
             <FormInput
                 name="username"
-                :value="username"
                 placeholder="Username"
+                v-model="username"
             />
         </form>
     </main>
@@ -17,6 +17,6 @@ export default {
         return {
             username: '',
         }
-    }
+    },
 }
 </script>

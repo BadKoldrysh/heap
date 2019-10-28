@@ -4,15 +4,19 @@
                 :class="inputClass"
                 :name="name"
                 :type="type"
-                :value.prop="value"
+                :value.prop="text"
                 :placeholder="placeholder"
-                @input="update" 
+                @input="update"
         />
     </div>
 </template>
 
 <script>
 export default {
+    model: {
+        prop: 'text',
+        event: 'update',
+    },
     props: {
         name: {
             type: String,
@@ -21,15 +25,15 @@ export default {
             type: String,
             default: 'text',
         },
-        value: {
-            required: true,
-        },
         placeholder: {
             type: String,
         },
         invalid: {
             type: Boolean,
             default: false,
+        },
+        text: {
+            required: true,
         },
     },
     computed: {
@@ -41,7 +45,7 @@ export default {
     },
     methods: {
         update(event) {
-            this.$emit('input', event.currentTarget.value);
+            this.$emit('update', event.currentTarget.value);
         },
     },
 }
