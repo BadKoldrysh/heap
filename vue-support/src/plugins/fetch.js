@@ -1,3 +1,6 @@
+import state from '../state'
+import router from '../router'
+
 let baseUrl;
 
 export default {
@@ -11,13 +14,13 @@ export default {
 };
 
 export async function $fetch(url, options) {
-    const response = await fetch(`${baseUrl}${url}`, finalOptions);
     const finalOptions = Object.assign({}, {
         headers: {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
     }, options);
+    const response = await fetch(`${baseUrl}${url}`, finalOptions);
     if (response.ok) {
         const data = await response.json();
         return data;
