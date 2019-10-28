@@ -14,6 +14,7 @@ export default {
 };
 
 export async function $fetch(url, options) {
+    console.log(options);
     const finalOptions = Object.assign({}, {
         headers: {
             'Content-Type': 'application/json',
@@ -21,10 +22,15 @@ export async function $fetch(url, options) {
         credentials: 'include',
     }, options);
     const response = await fetch(`${baseUrl}${url}`, finalOptions);
+    console.log(response);
     if (response.ok) {
         const data = await response.json();
         return data;
-    } else {
+    } else if (response.status === 403) {
+        // If the session is no longer valid
+        // We logout
+        state.user = null;
+    }else {
         const message = await response.text();
         const error = new Error(message);
         error.response = response;
