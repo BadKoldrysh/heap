@@ -10,6 +10,8 @@ import BlankB from './components/BlankB.vue';
 import BlankC from './components/BlankC.vue';
 import Login from './components/Login.vue';
 import TicketsLayout from './components/TicketsLayout.vue';
+import Tickets from './components/Tickets.vue';
+import NewTicket from './components/NewTicket.vue';
 
 // Install the plugin vue-router
 // for, obviously, routing between different pages
@@ -23,7 +25,10 @@ const routes = [
     { path: '/blank-b', name: 'blank-b', component: BlankB },
     { path: '/blank-c', name: 'blank-c', component: BlankC },
     { path: '/login', name: 'login', component: Login, meta: {guest: true} },
-    { path: '/tickets', name: 'tickets', component: TicketsLayout, meta: {private: true} },
+    { path: '/tickets', name: 'tickets', component: TicketsLayout, meta: {private: true}, children: [
+        { path: '', name: 'tickets', component: Tickets },
+        { path: 'new', name: 'new-ticket', component: NewTicket },
+    ] },
 ];
 
 const router = new VueRouter({
