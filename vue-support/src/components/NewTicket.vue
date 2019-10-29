@@ -12,6 +12,7 @@
                 maxlength="100"
                 required />
             <FormInput
+                type="textarea"
                 name="description"
                 v-model="description"
                 placeholder="Describe your problem in details" />
