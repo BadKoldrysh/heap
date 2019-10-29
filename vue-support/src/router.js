@@ -38,9 +38,8 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    // console.log('to', to.name);
 
-    if (to.meta.private && !state.user) {
+    if (to.matched.some(r => r.meta.private) && !state.user) {
         next({
             name: 'login',
             params: {
@@ -50,7 +49,7 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
-    if (to.meta.guest && state.user) {
+    if (to.matched.some(r => r.meta.guest) && state.user) {
         next({
             name: 'home',
         });
