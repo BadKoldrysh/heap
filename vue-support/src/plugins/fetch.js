@@ -30,6 +30,13 @@ export async function $fetch(url, options) {
         // If the session is no longer valid
         // We logout
         state.user = null;
+        // If the route is private
+        // we go to the login screen
+        if (router.currentRoute.matched.some(r => r.meta.private)) {
+            router.replace({ name: 'login', params: {
+                wantedRoute: router.currentRoute.fullPath,
+            }});
+        }
     }else {
         const message = await response.text();
         const error = new Error(message);
