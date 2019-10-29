@@ -11,6 +11,10 @@
                 placeholder="Short description (max 100 chars)"
                 maxlength="100"
                 required />
+            <FormInput
+                name="description"
+                v-model="description"
+                placeholder="Describe your problem in details" />
         </SmartForm>
     </div>
 </template>

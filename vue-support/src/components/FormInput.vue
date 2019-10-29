@@ -1,12 +1,14 @@
 <template>
     <div class="row">
-        <input  class="input"
-                :class="inputClass"
-                :name="name"
-                :type="type"
-                :value.prop="text"
-                :placeholder="placeholder"
-                @input="update"
+        <component
+            :is="element"
+            class="input"
+            :class="inputClass"
+            :name="name"
+            :type="type"
+            :value.prop="text"
+            :placeholder="placeholder"
+            @input="update"
         />
     </div>
 </template>
@@ -41,6 +43,9 @@ export default {
             return {
                 'invalid': this.invalid,
             };
+        },
+        element() {
+            return this.type === 'textarea' ? this.type : 'input';
         },
     },
     methods: {
