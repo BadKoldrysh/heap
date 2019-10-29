@@ -17,12 +17,33 @@
                 v-model="description"
                 placeholder="Describe your problem in details"
                 rows="12" />
+            <template slot="actions">
+                <router-link
+                    tag="button"
+                    :to="{name: 'tickets'}"
+                    class="secondary">
+                    Go Back
+                </router-link>
+                <button
+                    type="submit"
+                    :disabled="!valid">
+                    Send ticket
+                </button>
+            </template>
         </SmartForm>
     </div>
 </template>
 
 <script>
+import PersistantData from '../mixins/PersistantData';
+
 export default {
+    mixins: [
+        PersistantData('NewTicket', [
+            'title',
+            'description',
+        ]),
+    ],
     data() {
         return {
             title: '',
@@ -36,7 +57,14 @@ export default {
     },
     methods: {
         async operation() {
-            // TODO
+            const result = await this.$fetch('tickets/new', {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: this.title,
+                    description: this.description,
+                }),
+            });
+            this.title = this.description = '';
         },
     },
 }
