@@ -15,7 +15,8 @@
                 type="textarea"
                 name="description"
                 v-model="description"
-                placeholder="Describe your problem in details" />
+                placeholder="Describe your problem in details"
+                rows="12" />
         </SmartForm>
     </div>
 </template>
