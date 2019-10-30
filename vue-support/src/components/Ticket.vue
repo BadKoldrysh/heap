@@ -1,5 +1,6 @@
 <template>
     <div class="ticket">
+        <br /><br />
         <h2>Ticket</h2>
         <Loading v-if="remoteDataBusy" />
         <div class="empty" v-else-if="!ticket">
@@ -28,6 +29,8 @@
 </template>
 
 <script>
+import RemoteData from '../mixins/RemoteData';
+
 export default {
     mixins: [
         RemoteData({
