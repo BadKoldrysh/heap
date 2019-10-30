@@ -13,6 +13,7 @@ import TicketsLayout from './components/TicketsLayout.vue';
 import Tickets from './components/Tickets.vue';
 import NewTicket from './components/NewTicket.vue';
 import Ticket from './components/Ticket.vue';
+import NotFound from './components/NotFound.vue';
 
 // Install the plugin vue-router
 // for, obviously, routing between different pages
@@ -31,6 +32,9 @@ const routes = [
         { path: 'new', name: 'new-ticket', component: NewTicket },
         { path: ':id', name: 'ticket', component: Ticket, props: route => ({ id: route.params.id }) },
     ] },
+    // it's important to put the NotFound path to the end of this array
+    // for ensure that all the legit routes will be matched 
+    { path: '*', component: NotFound },
 ];
 
 const router = new VueRouter({
