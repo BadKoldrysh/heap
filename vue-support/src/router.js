@@ -40,7 +40,18 @@ const routes = [
 const router = new VueRouter({
     routes,
     // mode for URLs without the sharp symbol #
-    // mode: 'history',
+    mode: 'history',
+    scrollBehavior (to, from, savedPosition) {
+        // restore the scroll position
+        if (savedPosition) {
+            return savedPosition;
+        }
+        if (to.hash) {
+            // to scroll to <h1> each time
+            return { selector: 'h1' };
+        }
+        return { x: 0, y: 0 };
+    },
 });
 
 router.beforeEach((to, from, next) => {
