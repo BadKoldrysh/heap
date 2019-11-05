@@ -16,6 +16,7 @@ $coord_6 = [[1,7],[3,6],[4,4],[4,5],[1,6],[8,7]];   // false
 $coord_7 = [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6]];   // true
 $coord_8 = [[-3,-2],[-1,-2],[2,-2],[-2,-2],[0,-2]];   // true
 $coord_9 = [[0,1],[1,3],[-4,-7],[5,11]];   // true
+$coord_10 = [[-7,-21],[1,2]];               // true
 echo checkStraightLine($coord_1);
 echo '<br />';
 echo checkStraightLine($coord_2);
@@ -34,28 +35,19 @@ echo checkStraightLine($coord_8);
 echo '<br />';
 echo checkStraightLine($coord_9);
 echo '<br />';
-
+echo checkStraightLine($coord_10);
+echo '<br />';
 
 function checkStraightLine($coord) {
-    $diffX = abs($coord[1][0] - $coord[0][0]); 
-    $diffY = abs($coord[1][1] - $coord[0][1]); 
+    if (count($coord) > 2) {
+        $tn0 = ($coord[1][1] - $coord[0][1]) / ($coord[1][0] - $coord[0][0]); 
 
-    if ($diffX === 0 || $diffY === 0) {
-        return true;
-    }
-
-    for ($i = 0; $i < count($coord)-1; $i++) {       
-        if ((abs($coord[$i][0] - $coord[$i+1][0]) !== $diffX) || 
-            (abs($coord[$i][1] - $coord[$i+1][1]) !== $diffY)) {
-                if (((abs($coord[$i][0] - $coord[$i+1][0])%$diffX) === 0) && 
-                    ((abs($coord[$i][1] - $coord[$i+1][1])%$diffY) === 0)) {
-                        echo (abs($coord[$i][0] - $coord[$i+1][0]))%$diffX . ' ';
-                        echo (abs($coord[$i][1] - $coord[$i+1][1]))%$diffY . '; ';
-                        continue;
-                    } else {
-                        return false;
-                    }
+        for ($i = 3; $i < count($coord); $i++) {
+            $tni = ($coord[$i][1] - $coord[0][1]) / ($coord[$i][0] - $coord[0][0]);
+            if ($tni !== $tn0) {
+                return false;
             }
+        }
     }
 
     return true;
