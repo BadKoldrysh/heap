@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "JS Unit testing example, with using code by Godwin Ekuma. Thank you, Godwin",
     "main": "app.js",
-    "tests": {
+    "scripts": {
         "test": "mocha './src/**/*.test.js'",
         "start": "node src/app.js"
     },
