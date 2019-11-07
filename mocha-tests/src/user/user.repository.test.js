@@ -1,22 +1,22 @@
 // src/user/user.repository.test.js
 
-const chai = require("chai");
-const sinon = require("sinon");
-const expect = chai.expect;
-const faker = require("faker");
-const { UserModel } = require("../database");
-const UserRepository = require("./user.repository");
+import { expect as _expect } from "chai";
+import { stub as _stub } from "sinon";
+const expect = _expect;
+import { random, internet, date } from "faker";
+import { UserModel } from "../database";
+import UserRepository from "./user.repository";
 describe("UserRepository", function() {
     const stubValue = {
-        id: faker.random.uuid(),
-        name: faker.random.findName(),
-        email: faker.internet.email(),
-        createdAt: faker.date.past(),
-        updatedAt: faker.date.past(),
+        id: random.uuid(),
+        name: random.findName(),
+        email: internet.email(),
+        createdAt: date.past(),
+        updatedAt: date.past(),
     };
     describe("create", function() {
         it("should be a new user to the db", async function() {
-            const stub = sinon.stub(UserModel, "create").returns(stubValue);
+            const stub = _stub(UserModel, "create").returns(stubValue);
             const userRepository = new UserRepository();
             const user = await userRepository.create(stubValue.name, stubValue.email);
             expect(stub.calledOnce).to.be.true;

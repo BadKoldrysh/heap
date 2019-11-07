@@ -5,7 +5,7 @@
  * and out of out data. A repository is used between
  * the service layer and the model layer
  */
-const { UserModel } = require("../database");
+import { UserModel } from "../database";
 class UserRepository {
     constructor() {
         this.user = UserModel;
@@ -21,4 +21,4 @@ class UserRepository {
         return this.user.findOne({ id });
     }
 }
-module.exports = UserRepository;
+export default UserRepository;
