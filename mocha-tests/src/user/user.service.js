@@ -6,20 +6,20 @@
  * between the controller and the repository
  */
 
-import UserRepository from "./user.repository";
+const UserRepository = require("./user.repository");
 
 class UserService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
-    }
+  constructor(userRepository) {
+    this.userRepository = userRepository;
+  }
 
-    async create(name, email) {
-        return this.userRepository.create(name, email);
-    }
+  async create(name, email) {
+    return this.userRepository.create(name, email);
+  }
 
-    getUser(id) {
-        return this.userRepository.getUser(id);
-    }
+  getUser(id) {
+    return this.userRepository.getUser(id);
+  }
 }
 
-export default UserService;
+module.exports = UserService;
