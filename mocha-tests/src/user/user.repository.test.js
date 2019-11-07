@@ -1,8 +1,7 @@
 // src/user/user.repository.test.js
 
-import { expect as _expect } from "chai";
+import expect from "chai";
 import { stub as _stub } from "sinon";
-const expect = _expect;
 import { random, internet, date } from "faker";
 import { UserModel } from "../database";
 import UserRepository from "./user.repository";
@@ -25,6 +24,20 @@ describe("UserRepository", function() {
             expect(user.email).to.equal(stubValue.email);
             expect(user.createdAt).to.equal(stubValue.createdAt);
             expect(user.updatedAt).to.equal(stubValue.updatedAt);
-        })
-    })
-})
+        });
+    });
+
+    describe("getUser", function() {
+        it("should retrieve a user with specific id", async function() {
+            const stub = _stub(UserModel, "findOne").returns(stubValue);
+            const userRepository = new UserRepository();
+            const user = await userRepository.getUser(stubValue.id);
+            expect(stub.calledOnce).to.be.true;
+            expect(user.id).to.equal(stubValue.id);
+            expect(user.name).to.equal(stubValue.name);
+            expect(user.email).to.equal(stubValue.email);
+            expect(user.createdAt).to.equal(stubValue.createdAt);
+            expect(user.updatedAt).to.equal(stubValue.updatedAt);
+        });
+    });
+});
