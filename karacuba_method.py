@@ -1,5 +1,8 @@
 import math
 
+# Method for multiply two number with better speed
+# by ukrainian scientist Anatolij Karacuba
+
 def karacuba_method(x, y):
     xn = len(str(x))
     yn = len(str(y))
@@ -20,9 +23,9 @@ def karacuba_method(x, y):
     c = int(y // powN)
     d = int(y % powN)
 
-    ac = int(a * c)
-    bd = int(b * d)
-    adbc = int(((a + b)*(c + d)) - ac - bd)
+    ac = karacuba_method(a, c)
+    bd = karacuba_method(b, d)
+    adbc = int(karacuba_method((a + b), (c + d)) - ac - bd)
 
     result = int((pow(10, n) * ac) + (powN * adbc) + bd)
     return int(result)
@@ -36,4 +39,3 @@ def next_two_pow(number):
     
     return n
 
-print(karacuba_method(1685287499328328297814655639278583667919355849391453456921116729, 7114192848577754587969744626558571536728983167954552999895348492))
