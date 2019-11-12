@@ -1,11 +1,10 @@
 <?php
-
 /**
  * Method for multiply two number with better speed
  * by ukrainian scientist Anatolij Karacuba
  */
 
-echo karacubaMethod(12345, 5678);
+// echo karacubaMethod(12345, 5678);
 
 function karacubaMethod($x, $y) {
     $xn = strlen((string)$x);
@@ -18,22 +17,24 @@ function karacubaMethod($x, $y) {
     }
 
     if ($n === 1) {
-        return $x * $y;
+        return bcmul($x, $y);
     }
 
     $powN = pow(10, $n/2);
-    $a = (int)($x / $powN);
-    $b = $x % $powN;
-    $c = (int)($y / $powN);
-    $d = $y % $powN;
+    // $a = (int)($x / $powN);
+    $a = bcdiv($x, $powN);
+    $b = bcmod($x, $powN);
+    // $c = ($y / $powN);
+    $c = bcdiv($y, $powN);
+    $d = bcmod($y, $powN);
 
     // echo 'a = ' . $a . ', b = ' . $b . ', c = ' . $c . ', d = ' . $d;
     
     $ac = karacubaMethod($a, $c);
     $bd = karacubaMethod($b, $d);
-    $adbc = karacubaMethod($a + $b, $c + $d) - $ac - $bd;
+    $adbc = bcadd(karacubaMethod(bcadd($a, $b), bcadd($c, $d)), "-".bcadd($ac, $bd));
 
-    $result = pow(10, $n) * $ac + $powN * $adbc + $bd;
+    $result = bcadd(bcmul(pow(10, $n), $ac), bcadd(bcmul($powN, $adbc), $bd));
     return $result;
 }
 
