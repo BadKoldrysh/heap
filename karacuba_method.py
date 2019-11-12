@@ -1,26 +1,24 @@
 import math
-import sys
-sys.setrecursionlimit(10**6)
 
-def karacubaMethod(x, y):
+def karacuba_method(x, y):
     xn = len(str(x))
     yn = len(str(y))
     n = 0
 
     if xn == yn:
-        n = nextTwoPow(xn)
+        n = next_two_pow(xn)
     else:
-        n = nextTwoPow(xn) if xn > yn else nextTwoPow(yn)
+        n = next_two_pow(xn) if xn > yn else next_two_pow(yn)
     
     if n == 1:
         return x * y
     
     n2 = int(n / 2);
     powN = pow(10, n2)
-    a = int(str(x)[:n2])
-    b = int(str(x)[n2:])
-    c = int(str(y)[:n2])
-    d = int(str(y)[n2:])
+    a = int(x // powN)
+    b = int(x % powN)
+    c = int(y // powN)
+    d = int(y % powN)
 
     ac = int(a * c)
     bd = int(b * d)
@@ -29,7 +27,7 @@ def karacubaMethod(x, y):
     result = int((pow(10, n) * ac) + (powN * adbc) + bd)
     return int(result)
 
-def nextTwoPow(number):
+def next_two_pow(number):
     n = 0
     for i in range(0, 15):
         n = 2**i;
@@ -38,4 +36,4 @@ def nextTwoPow(number):
     
     return n
 
-print(karacubaMethod(34215432964249374812219364786397, 94541964835273822784327848699719))
+print(karacuba_method(1685287499328328297814655639278583667919355849391453456921116729, 7114192848577754587969744626558571536728983167954552999895348492))
