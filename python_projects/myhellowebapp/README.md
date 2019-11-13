@@ -8,3 +8,5 @@ Than just enter to bash:
 
 For deactivate enter `deactivate`
 
+This project can have many apps. For creating apps use:
+`django-admin startapp app-name`
