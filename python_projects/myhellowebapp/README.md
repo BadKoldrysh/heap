@@ -6,3 +6,5 @@ To activate virtual environment you need to install virtualenv (in pip).
 Than just enter to bash:
 `source ./venv/Scripts/activate`
 
+For deactivate enter `deactivate`
+
