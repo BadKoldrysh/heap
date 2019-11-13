@@ -30,7 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# We need to tell the project that we've added an app to it
+# We've added the Collection app
 INSTALLED_APPS = [
+    'collection',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
