@@ -5,3 +5,18 @@ body {
 h1 {
     border: 5px solid green;
 }
+
+.btn {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 15px;
+    border: 2px solid #f50;
+    border-radius: 15px;
+    background-color: #ffa;
+    transition: background-color .3s;
+}
+
+.btn:hover {
+    background-color: #f50;
+    color: white;
+}
