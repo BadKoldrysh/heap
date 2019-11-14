@@ -4,6 +4,6 @@
 {% block content %}
     <h1>Hello World!</h1>
     <p>I am basic home page.</p>
-    <a href="/contact" class="btn">Contact</a>
-    <a href="/about" class="btn">About</a>
+    <a href="{% url 'contact' %}" class="btn">Contact</a>
+    <a href="{% url 'about' %}" class="btn">About</a>
 {% endblock %}
