@@ -22,7 +22,7 @@ For a project start:
 This project can have many apps. For creating apps use:
 `django-admin startapp app-name`
 
-For a database setup:
+For a database setup and do a migration:
 `python manage.py migrate`
 
 For start server:
@@ -30,3 +30,6 @@ For start server:
 
 Create superuser: 
 `python manage.py createsuperuser`
+
+Create initial migration (do it after creating models):
+`python manage.py makemigrations`
