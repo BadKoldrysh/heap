@@ -1,8 +1,5 @@
 <?php
 
-$testArr = [1];
-print_r(mergeSort($testArr));
-
 function mergeSort($arr)
 {
     if(count($arr) == 1) {
@@ -21,14 +18,19 @@ function mergeArrays($arr1, $arr2)
     $resultArr = array();
     $i = 0; $j = 0;
     $n = count($arr1); $m = count($arr2);
-    while($i < $n || $j < $m) {
-        if ($j === $m || $arr1[$i] <= $arr2[$j]) {
+    while($i < $n && $j < $m) {
+        if ($arr1[$i] < $arr2[$j]) {
             array_push($resultArr, $arr1[$i]);
             $i++;
-        } else if ($i === $n || $arr1[$i] > $arr2[$j]){
+        } else {
             array_push($resultArr, $arr2[$j]);
             $j++;
         }
+    }
+    if($i === $n){
+        $resultArr = array_merge($resultArr, array_slice($arr2, $j, $m));
+    } else {
+        $resultArr = array_merge($resultArr, array_slice($arr1, $i, $n));
     }
 
     return $resultArr;
