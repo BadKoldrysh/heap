@@ -27,3 +27,6 @@ For a database setup:
 
 For start server:
 `python manage.py runserver`
+
+Create superuser: 
+`python manage.py createsuperuser`
