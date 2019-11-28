@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    Thing detail - {{ block.super }}
+{% endblock %}
+{% block content %}
+    <h2>test</h2>
+    <h1>{{ thing.name }}</h1>
+    <p>{{ thing.description }}</p>
+    
+    <a href="{% url 'home' %}" class="btn">Back</a>
+{% endblock %}

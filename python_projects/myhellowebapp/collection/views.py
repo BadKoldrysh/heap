@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from collection.models import Thing
+import logging
 
 # Create your views here.
 def index(request):
@@ -17,3 +18,12 @@ def index(request):
         'things': things,
     })
 
+def thing_detail(request, slug):
+    # grab the object...
+    logging.warning(slug)
+    thing = Thing.objects.get(slug=slug)
+
+    # and pass to the template
+    return render(request, 'things/thing_detail.html', {
+        'thing': thing,
+    })
