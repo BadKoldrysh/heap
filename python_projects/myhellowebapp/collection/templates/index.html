@@ -4,12 +4,10 @@
 {% block content %}
     <h1>Hello World!</h1>
     <p>I am basic home page.</p>
-    <p>Number is: {{ number }}</p>
-    {% if number == 4 %}
-        <p>IT'S TRUE</p>
-    {% else %}
-        <p>IT'S FALSE</p>
-    {% endif %}
+    {% for thing in things %}
+    <h2>{{ thing.name }}</h2>
+    <p>{{ thing.description }}</p>
+    {% endfor %}
     <a href="{% url 'contact' %}" class="btn">Contact</a>
     <a href="{% url 'about' %}" class="btn">About</a>
 {% endblock %}
