@@ -2,3 +2,4 @@ server/db/users.db
 server/db/tickets.db
 .vscode/
 __pycache__/
+*.exe
