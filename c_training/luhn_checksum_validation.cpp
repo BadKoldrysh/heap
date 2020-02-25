@@ -2,10 +2,11 @@
 
 using namespace std;
 
-// knowing which digits to double
-// treating doubled numbers 10 and grerater according to their individual digits
 // knowing we've reached the end of the number
+//
+// knowing which digits to double
 // reading each digit separately
+// treating doubled numbers 10 and grerater according to their individual digits
 
 int doubledDigitValue(int digit) {
     int doubledDigit = digit * 2;
@@ -17,9 +18,23 @@ int doubledDigitValue(int digit) {
 }
 
 int main() {
-    int digit;
-    cout << "Enter a single digit number, 0-9: ";
-    cin >> digit;
+    char digit;
+    int checksum = 0;
+
+    cout << "Enter a six-digit number: ";
+    for (int i = 0; i < 6; i++) {
+        cin >> digit;
+        if (i % 2 == 0) {
+            checksum += doubledDigitValue(digit - '0');
+        } else {
+            checksum += digit - '0';
+        }
+    }
     
-    cout << doubledDigitValue(digit) << "\n";
+    cout << "Checksum: " << checksum << "\n";
+    if (checksum % 10 == 0) {
+        cout << "Number is valid\n";
+    } else {
+        cout << "Number is invalid\n";
+    }
 }
