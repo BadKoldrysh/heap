@@ -17,24 +17,40 @@ int doubledDigitValue(int digit) {
     }
 }
 
-int main() {
+void validateNumber() {
     char digit;
-    int checksum = 0;
+    int checksumOdd = 0;
+    int checksumEven = 0;
+    int position = 1;
 
-    cout << "Enter a six-digit number: ";
-    for (int i = 0; i < 6; i++) {
-        cin >> digit;
-        if (i % 2 == 0) {
-            checksum += doubledDigitValue(digit - '0');
+    cout << "Enter a number: ";
+    digit = cin.get();
+    while (digit != 10) {
+        if (position % 2 == 0) {
+            checksumOdd += doubledDigitValue(digit - '0');
+            checksumEven += digit - '0';
         } else {
-            checksum += digit - '0';
+            checksumOdd += digit - '0';
+            checksumEven += doubledDigitValue(digit - '0');
         }
+        digit = cin.get();
+        position++;
     }
     
+    int checksum;
+    if ((position - 1) % 2 == 0) {
+        checksum = checksumEven;
+    } else {
+        checksum = checksumOdd;
+    }
     cout << "Checksum: " << checksum << "\n";
     if (checksum % 10 == 0) {
-        cout << "Number is valid\n";
+        cout << "Checksum is divisible by 10. Number is valid\n";
     } else {
-        cout << "Number is invalid\n";
+        cout << "Checksum is not divisible by 10. Number is invalid\n";
     }
+}
+
+int main() {
+    validateNumber();
 }
