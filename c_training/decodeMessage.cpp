@@ -36,7 +36,7 @@ void mainProgram() {
     char character;
     char smbl;
     int digit;
-    
+
     int numb = 0;
     int mode = 0;
 
@@ -66,7 +66,7 @@ void mainProgram() {
                 } else {
                     mode = 0;
                 }
-            } 
+            }
             numb = 0;
         } else {
             digit = character - '0';
