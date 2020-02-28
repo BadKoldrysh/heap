@@ -2,11 +2,7 @@
 
 using namespace std;
 
-// knowing we've reached the end of the number
-//
-// knowing which digits to double
-// reading each digit separately
-// treating doubled numbers 10 and grerater according to their individual digits
+// The program for validate a number by the Luhn checksum
 
 int doubledDigitValue(int digit) {
     int doubledDigit = digit * 2;
