@@ -134,7 +134,7 @@ SELECT MAX(pages) FROM books;
 
 SELECT MAX(pages), title FROM books;
 
-SELECT pages from books where pages=634;
+SELECT pages FROM books WHERE pages=634;
 SELECT title, pages FROM books
     WHERE books=(SELECT MAX(pages) FROM books);
 SELECT title, pages FROM books ORDER BY pages DESC LIMIT 1; -- same, but faster
@@ -144,7 +144,7 @@ SELECT author_fname, author_lname, MIN(released_year) FROM books
 
 SELECT SUM(pages) FROM books;
 SELECT SUM(released_year) FROM books;
-SELECT author_fname, author_lname, SUM(pages), count(title) FROM books GROUP BY author_lname, author_fname;
+SELECT author_fname, author_lname, SUM(pages), COUNT(title) FROM books GROUP BY author_lname, author_fname;
 
 SELECT AVG(pages) FROM books;
 SELECT released_year, AVG(stock_quantity) FROM books GROUP BY released_year;
@@ -153,7 +153,7 @@ SELECT author_fname, author_lname, AVG(pages) FROM books
     ORDER BY 3 DESC
     LIMIT 1;
 
-SELECT released_year, count(*) FROM books
+SELECT released_year, COUNT(*) FROM books
     GROUP BY 1;
 
 SELECT CONCAT(author_fname, ' ', author_lname) AS 'Author full name', pages FROM books
@@ -167,7 +167,7 @@ SELECT CONCAT(author_fname, ' ', author_lname) AS 'Author full name', pages FROM
     );
 
 SELECT 
-    released_year AS 'year', count(*) AS '# books', AVG(pages) AS 'avg pages'
+    released_year AS 'year', COUNT(*) AS '# books', AVG(pages) AS 'avg pages'
     FROM books
     GROUP BY released_year
     ORDER BY released_year;
