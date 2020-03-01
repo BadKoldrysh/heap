@@ -33,6 +33,7 @@ let connection = mysql.createConnection({
 // INSERTING DYNAMIC DATA
 let person = {
     email: faker.internet.email(),
+    created_at: faker.date.past(),
 };
 
 connection.query("INSERT INTO users SET ?", person, function(error, results) {
