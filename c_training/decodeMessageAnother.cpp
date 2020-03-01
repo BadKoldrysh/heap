@@ -9,6 +9,20 @@ char convertNumberToLowercaseLetter(int number) {
     return number + 'a' - 1;
 }
 
+char convertNumberToSymbol(int number) {
+    
+    switch (number) {
+        case 1: return '!';
+        case 2: return '?';
+        case 3: return ',';
+        case 4: return '.';
+        case 5: return ' ';
+        case 6: return ';';
+        case 7: return '"';
+        case 8: return '\'';
+    }
+}
+
 void getNumbers() {
     char digitChar;
     do {
@@ -24,5 +38,5 @@ void getNumbers() {
 }
 
 int main() {
-    // convertNumberToLowercaseLetter();
+    // convertNumberToSymbol();
 }
