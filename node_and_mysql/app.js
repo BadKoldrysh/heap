@@ -9,9 +9,14 @@ let faker = require('faker');
 console.log(faker.internet.email());
 console.log(faker.date.past());
 
-console.log(faker.address.streetAddress());
-console.log(faker.address.city());
-console.log(faker.address.state());
+generateAddress();
+
+function generateAddress()
+{
+    console.log(faker.address.streetAddress());
+    console.log(faker.address.city());
+    console.log(faker.address.state());
+}
 
 // for (let i = 0; i < 25; i++) {
 //     console.log(faker.internet.email());
