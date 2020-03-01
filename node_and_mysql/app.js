@@ -7,14 +7,14 @@ let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'ig_clone',
+    database: 'join_us',
 });
 
-let q = "SELECT 1 + 5 AS answer";
+let q = "SELECT COUNT(*) AS total FROM users";
 
 connection.query(q, function(error, results, fields) {
     if (error) throw error;
-    console.log(results[0].answer);
+    console.log(results[0].total);
 });
 
 connection.end();
