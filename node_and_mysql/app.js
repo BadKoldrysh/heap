@@ -32,7 +32,7 @@ let connection = mysql.createConnection({
 //
 // INSERTING DYNAMIC DATA
 let person = {
-    email: "mr.robot@yandex.ru",
+    email: faker.internet.email(),
 };
 
 connection.query("INSERT INTO users SET ?", person, function(error, results) {
