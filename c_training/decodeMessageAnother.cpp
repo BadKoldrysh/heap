@@ -3,15 +3,17 @@
 using namespace std;
 
 void mainProgram() {
-    cout << "Enter a number with as many digits as you like: ";
-    char digitChar = cin.get();
-    int number = digitChar - '0';
-    digitChar = cin.get();
-    while (digitChar != 10) {
-        number = number * 10 + (digitChar - '0');
+    char digitChar;
+    do {
         digitChar = cin.get();
-    }
-    cout << "Numbered entered: " << number << "\n";
+        int number = digitChar - '0';
+        digitChar = cin.get();
+        while ((digitChar != 10) && (digitChar != ',')) {
+            number = number * 10 + (digitChar - '0');
+            digitChar = cin.get();
+        }
+        cout << "Numbered entered: " << number << "\n";
+    } while (digitChar != 10);
 }
 
 int main() {
