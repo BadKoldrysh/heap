@@ -26,22 +26,39 @@ let connection = mysql.createConnection({
 // let q = "INSERT INTO users(email) VALUES ('tommy.lee@mail.com')";
 
 // connection.query(q, function(error, results, fields) {
+    //     if (error) throw error;
+    //     console.log(results);
+    // });
+//
+// connection.end();
+
+// INSERTING DYNAMIC DATA
+// let person = {
+//     email: faker.internet.email(),
+//     created_at: faker.date.past(),
+// };
+
+// connection.query("INSERT INTO users SET ?", person, function(error, results) {
 //     if (error) throw error;
 //     console.log(results);
 // });
-//
-// INSERTING DYNAMIC DATA
-let person = {
-    email: faker.internet.email(),
-    created_at: faker.date.past(),
-};
 
-connection.query("INSERT INTO users SET ?", person, function(error, results) {
-    if (error) throw error;
+// connection.end();
+
+let data = [
+    ['balh@gmail.com', '2017-08-12 14:54:02'],
+    ['rwe2ed@gmail.com', '2017-08-02 12:55:32'],
+    ['bhjk@gmail.com', '2017-08-22 10:06:01'],
+];
+
+connection.query("INSERT INTO users(email, created_at) VALUES ?", [data], function(error, results) {
+    console.log(error);
     console.log(results);
 });
 
 connection.end();
+
+
 
 function generateAddress()
 {
