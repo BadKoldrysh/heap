@@ -45,11 +45,14 @@ let connection = mysql.createConnection({
 
 // connection.end();
 
-let data = [
-    ['balh@gmail.com', '2017-08-12 14:54:02'],
-    ['rwe2ed@gmail.com', '2017-08-02 12:55:32'],
-    ['bhjk@gmail.com', '2017-08-22 10:06:01'],
-];
+let data = [];
+
+for (let i = 0; i < 500; i++) {
+    data.push([
+        faker.internet.email(),
+        faker.date.past(),
+    ]);
+}
 
 connection.query("INSERT INTO users(email, created_at) VALUES ?", [data], function(error, results) {
     console.log(error);
