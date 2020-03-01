@@ -10,11 +10,24 @@ let connection = mysql.createConnection({
     database: 'join_us',
 });
 
-let q = "SELECT COUNT(*) AS total FROM users";
+// SELECTING
+
+// let q = "SELECT COUNT(*) AS total FROM users";
+
+// connection.query(q, function(error, results, fields) {
+//     if (error) throw error;
+//     console.log(results[0].total);
+// });
+
+// connection.end();
+
+// INSERTING
+
+let q = "INSERT INTO users(email) VALUES ('tommy.lee@mail.com')";
 
 connection.query(q, function(error, results, fields) {
     if (error) throw error;
-    console.log(results[0].total);
+    console.log(results);
 });
 
 connection.end();
