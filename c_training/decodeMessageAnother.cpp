@@ -3,7 +3,7 @@
 using namespace std;
 
 void mainProgram() {
-    cout << "Enter a three-digit or four-digit number: ";
+    cout << "Enter a three-digit, four-digit or five-digit number: ";
     char digitChar = cin.get();
     int number = (digitChar - '0') * 100;
     digitChar = cin.get();
@@ -15,7 +15,13 @@ void mainProgram() {
         cout << "Numbered entered: " << number << "\n";
     } else {
         number = number * 10 + (digitChar - '0');
-        cout << "Numbered entered: " << number << "\n";
+        digitChar = cin.get();
+        if (digitChar == 10) {
+            cout << "Numbered entered: " << number << "\n";
+        } else {
+            number = number * 10 + (digitChar - '0');
+            cout << "Numbered entered: " << number << "\n";
+        }
     }
 }
 
