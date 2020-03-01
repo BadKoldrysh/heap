@@ -2,13 +2,11 @@
 
 using namespace std;
 
-void convertNumberToUppercaseLetter() {
-    cout << "Enter a number 1-26: ";
-    int number;
-    cin >> number;
-    char outputCharacter;
-    outputCharacter = number + 'A' - 1;
-    cout << "Equivalent symbol: " << outputCharacter << "\n";
+char convertNumberToUppercaseLetter(int number) {
+    return number + 'A' - 1;
+}
+char convertNumberToLowercaseLetter(int number) {
+    return number + 'a' - 1;
 }
 
 void getNumbers() {
@@ -26,5 +24,5 @@ void getNumbers() {
 }
 
 int main() {
-    convertNumberToUppercaseSymbol();
+    // convertNumberToLowercaseLetter();
 }
