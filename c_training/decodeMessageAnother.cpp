@@ -3,13 +3,20 @@
 using namespace std;
 
 void mainProgram() {
-    cout << "Enter a two-digit number: ";
+    cout << "Enter a three-digit or four-digit number: ";
     char digitChar = cin.get();
-    int overallNumber = (digitChar - '0') * 10;
+    int number = (digitChar - '0') * 100;
     digitChar = cin.get();
-
-    overallNumber += digitChar - '0';
-    cout << "That number as an integer: " << overallNumber << "\n";
+    number += (digitChar - '0') * 10;
+    digitChar = cin.get();
+    number += (digitChar - '0');
+    digitChar = cin.get();
+    if (digitChar == 10) { // end of the line
+        cout << "Numbered entered: " << number << "\n";
+    } else {
+        number = number * 10 + (digitChar - '0');
+        cout << "Numbered entered: " << number << "\n";
+    }
 }
 
 int main() {
