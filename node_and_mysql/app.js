@@ -23,9 +23,19 @@ let connection = mysql.createConnection({
 
 // INSERTING
 
-let q = "INSERT INTO users(email) VALUES ('tommy.lee@mail.com')";
+// let q = "INSERT INTO users(email) VALUES ('tommy.lee@mail.com')";
 
-connection.query(q, function(error, results, fields) {
+// connection.query(q, function(error, results, fields) {
+//     if (error) throw error;
+//     console.log(results);
+// });
+//
+// INSERTING DYNAMIC DATA
+let person = {
+    email: "mr.robot@yandex.ru",
+};
+
+connection.query("INSERT INTO users SET ?", person, function(error, results) {
     if (error) throw error;
     console.log(results);
 });
