@@ -2,16 +2,31 @@
 
 let express = require("express");
 let mysql = require("mysql");
+let bodyParser = require("body-parser");
 
 let app = express();
 
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: true}));
 
 let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'join_us',
+});
+
+app.post("/register", function(req, res) {
+    let person = {
+        email: req.body.email,
+    };
+
+    connection.query('INSERT INTO users SET ?', person, function(err, result) {
+        if (err) throw err;
+        res.redirect("/");
+    })
+
+    // console.log("POST REQUEST SENT TO /register" + req.body.email);
 });
 
 app.get("/", function(req, res) {
