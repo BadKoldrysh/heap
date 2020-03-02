@@ -1,9 +1,24 @@
+'strict types';
+
 let express = require("express");
+let mysql = require("mysql");
+
 let app = express();
 
-app.get("/", function(request, result) {
-    result.send("HELLO FROM EXPRESS WEB APP");
-    console.log("HOME PAGE HAS REQUESTED");
+let connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'join_us',
+});
+
+app.get("/", function(req, res) {
+    let q = "SELECT COUNT(*) AS count FROM users";
+    connection.query(q, function(error, result) {
+        if (error) throw error;
+        let count = result[0].count;
+        res.send("We have " + count + " users in our db");
+    });
 });
 
 app.get("/contacts", function(req, res) {
