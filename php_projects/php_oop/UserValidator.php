@@ -46,7 +46,15 @@ class userValidator
 
     private function validateEmail(): void
     {
+        $val = trim($this->data['email']);
 
+        if (empty($val)) {
+            $this->addError('email', 'email cannot be empty');
+        } else {
+            if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
+                $this->addError('email', 'email must be a valid email');
+            }
+        }
     }
 
     private function addError(string $key, string $msg)
