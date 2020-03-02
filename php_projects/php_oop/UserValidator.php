@@ -10,6 +10,33 @@
 class userValidator {
     private $data;
     private $error = [];
+    private static $fields = ['username', 'email'];
 
-    
+    public function __construct($postData) {
+        $this->data = $postData;
+    }
+
+    public function validateForm() {
+        foreach (self::fields as $field) {
+            if (!array_key_exist($field, $this->data)) {
+                trigger_error("$field is not present in data");
+                return;
+            }
+        }
+
+        $this->validateUsername();
+        $this->validateEmail();
+    }
+
+    private function validateUsername() {
+
+    }
+
+    private function validateEmail() {
+
+    }
+
+    private function addError() {
+
+    }
 }
