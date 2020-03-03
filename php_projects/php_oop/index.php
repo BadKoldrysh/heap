@@ -1,6 +1,11 @@
 <?php
 
-require('UserValidator.php');
+declare(strict_types=1);
+
+require_once('UserValidator.php');
+require_once('MysqlConnection.php');
+require_once('SqliteConnection.php');
+require_once('Database.php');
 
 if (isset($_POST['submit'])) {
     // validate entries
@@ -8,6 +13,15 @@ if (isset($_POST['submit'])) {
     $errors = $validation->validateForm();
 
     // save data to db
+
+    $db = new Database(new SqliteConnection("training_app.sqlite"));
+    foreach ($db->getAll() as $row) {
+        printf("%s: %s<br />", $row['username'], $row['email']);
+    }
+    // $db = new Database(new MysqlConnection("localhost", "root", "", "training_app"));
+    // foreach ($db->getAll() as $row) {
+    //     printf("%s: %s<br />", $row['username'], $row['email']);
+    // }
 }
 ?>
 
@@ -22,13 +36,13 @@ if (isset($_POST['submit'])) {
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
             <label>Username:</label>
             <!-- htmlspecialchars is used for security -->
-            <input type="text" name="username" value="<?php echo htmlspecialchars($_POST['username']) ?>"/>
+            <input type="text" name="username" value="<?php echo htmlspecialchars($_POST['username'] ?? '') ?>"/>
             <div class="error">
                 <?php echo $errors['username'] ?? ''; ?>
             </div>
 
             <label>Email:</label>
-            <input type="text" name="email" value="<?php echo htmlspecialchars($_POST['email']) ?>" />
+            <input type="text" name="email" value="<?php echo htmlspecialchars($_POST['email'] ?? '') ?>" />
             <div class="error">
                 <?php echo $errors['email'] ?? ''; ?>
             </div>
