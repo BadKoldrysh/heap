@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once('UserValidator.php');
 require_once('MysqlConnection.php');
 require_once('SqliteConnection.php');
-require_once('Database.php');
+require_once('DbFactory.php');
 
 if (isset($_POST['submit'])) {
     // validate entries
@@ -13,15 +13,14 @@ if (isset($_POST['submit'])) {
     $errors = $validation->validateForm();
 
     // save data to db
-
-    $db = new Database(new SqliteConnection("training_app.sqlite"));
+    $db = DbFactory::create(new SqliteConnection("training_app.sqlite"));
     foreach ($db->getAll() as $row) {
         printf("%s: %s<br />", $row['username'], $row['email']);
     }
-    // $db = new Database(new MysqlConnection("localhost", "root", "", "training_app"));
-    // foreach ($db->getAll() as $row) {
-    //     printf("%s: %s<br />", $row['username'], $row['email']);
-    // }
+    $db = DbFactory::create(new MysqlConnection("localhost", "root", "", "training_app"));
+    foreach ($db->getAll() as $row) {
+        printf("%s: %s<br />", $row['username'], $row['email']);
+    }
 }
 ?>
 
