@@ -15,4 +15,14 @@ class Database
     {
         return $this->dbConnection->getAll();
     }
+
+    public function saveUser(string $username, string $email)
+    {
+        return $this->dbConnection->saveUser($username, $email);
+    }
+
+    public function getErrors()
+    {
+        return $this->dbConnection->getErrors();
+    }
 }

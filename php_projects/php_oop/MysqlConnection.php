@@ -27,4 +27,10 @@ class MysqlConnection implements DbConnection
 
         return $res;
     }
+
+    public function saveUser(string $username, string $email)
+    {
+        $query = "INSERT INTO users(username, email) VALUES ({$username}, {$email})";
+        return $this->connection->query($query);
+    }
 }

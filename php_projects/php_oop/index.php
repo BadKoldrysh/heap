@@ -13,14 +13,19 @@ if (isset($_POST['submit'])) {
     $errors = $validation->validateForm();
 
     // save data to db
+
+
     $db = DbFactory::create(new SqliteConnection("training_app.sqlite"));
+    if (empty($errors)) {
+        $res = $db->saveUser($_POST['username'], $_POST['email']);
+    }
     foreach ($db->getAll() as $row) {
         printf("%s: %s<br />", $row['username'], $row['email']);
     }
-    $db = DbFactory::create(new MysqlConnection("localhost", "root", "", "training_app"));
-    foreach ($db->getAll() as $row) {
-        printf("%s: %s<br />", $row['username'], $row['email']);
-    }
+    // $db = DbFactory::create(new MysqlConnection("localhost", "root", "", "training_app"));
+    // foreach ($db->getAll() as $row) {
+    //     printf("%s: %s<br />", $row['username'], $row['email']);
+    // }
 }
 ?>
 
