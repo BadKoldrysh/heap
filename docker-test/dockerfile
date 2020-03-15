@@ -1,0 +1,18 @@
+# Get the base ubuntu 19.10 from Docker hub
+
+# Head to https://hub.docker.com/_/ubuntu for other variations
+
+FROM ubuntu:19.10
+
+# Get the necessary updates
+
+RUN apt-get update
+
+# This ensures that the first directory that is opened once image is # build is /home
+
+WORKDIR /home
+
+# docker build
+# docker build -t ubuntu1:latest
+# docker run --rm -it ubuntu1:latest
+# use winpty for windows
