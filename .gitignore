@@ -3,3 +3,5 @@ server/db/tickets.db
 .vscode/
 __pycache__/
 *.exe
+php_docker/mysql/data/
+
