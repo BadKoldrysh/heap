@@ -14,14 +14,39 @@
             <div class="product-image">
                 <img :src="image" :alt="altText" />
             </div>
-
-            <a :href="linkToPast">{{ linkText }}</a>
-
+            
+            
             <div class="product-info">
                 <h1>{{ product }}</h1>
+                <h2>Counter: {{ counter }}</h2>
+                <button v-on:click="increaseCounter">Increase</button>
+                <button v-on:click="decreaseCounter" class="red-btn">Decrease</button>
+                <button v-on:click="resetCounter" class="neutral-btn">Reset</button>
                 <p>{{ description }}</p>
+                <h3 v-if="isPremium">It is a premium thing!</h3>
+
+                <p v-if="inventory > 10">In stock</p>
+                <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+                <p v-else>Out of stock</p>
+
+                <h2>SIZES</h2>
+                <div class="sizes">
+                    <span v-for="size in sizes">{{ size + " " }}</span>
+                </div>
+                <ul>
+                    <li v-for="detail in details">{{ detail }}</li>
+                </ul>
+
+                <h4>Product variants</h4>
+                <div v-for="variant in variants" :key="variant.variantId">
+                    <p @mouseover="changeSocksImage(variant.variantImage)" class="item">{{ variant.variantName }}</p>
+                </div>
+
+                <span v-show = "onSale">On Sale!!!</span>
             </div>
         </div>
+
+        <a :href="linkToPast">{{ linkText }}</a>
     </div>
     
     <script src="https://unpkg.com/vue"></script>
