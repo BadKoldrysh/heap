@@ -108,3 +108,10 @@ body {
   .outOfStock {
     text-decoration: line-through;
   }
+
+  .productDetails {
+  }
+
+  .sizes {
+    padding-bottom: 15px;
+  }

@@ -10,55 +10,7 @@
     <div class="nav-bar"></div>
 
     <div id="app">
-        <div class="product">
-            <div class="product-image">
-                <img :src="image" :alt="altText" />
-            </div>
-            
-            
-            <div class="product-info">
-                <h1>{{ title }}</h1>
-                <h2>Counter: {{ counter }}</h2>
-                <button v-on:click="increaseCounter">Increase</button>
-                <button v-on:click="decreaseCounter" class="red-btn">Decrease</button>
-                <button v-on:click="resetCounter" class="neutral-btn">Reset</button>
-                <p>{{ description }}</p>
-                <h3 v-if="isPremium">It is a premium thing!</h3>
-
-                <p v-if="inventory > 10">In stock</p>
-                <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
-                <p v-else>Out of stock</p>
-                <p>{{ sale }}</p>
-
-                <h2>SIZES</h2>
-                <div class="sizes">
-                    <span v-for="size in sizes">{{ size + " " }}</span>
-                </div>
-                <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
-                </ul>
-
-                <h4>Product variants</h4>
-                <div class="color-box"
-                     v-for="(variant, index) in variants" 
-                     :key="variant.variantId"
-                     :style="{ backgroundColor: variant.variantColor }"
-                     @mouseover="modifyImage(index)"
-                     >
-                </div>
-
-                <span v-show = "onSale">On Sale!!!</span>
-                <p :class="{ outOfStock: inStock }">Out of stock!</p>
-                <button v-on:click="addToCart" 
-                        :disabled="!inStock"
-                        :class="{ disabledButton: !inStock, disabledButton2: !inStock }">Add to Cart</button>
-                <button v-on:click="addToCart" 
-                        :disabled="!inStock"
-                        :class="[ disableCl, disableCl2 ]">Add to Cart</button>
-            </div>
-        </div>
-
-        <a :href="linkToPast">{{ linkText }}</a>
+        <product :is-user-premium="premiumStatus"></product>
     </div>
     
     <script src="https://unpkg.com/vue"></script>
