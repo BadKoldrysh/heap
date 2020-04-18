@@ -57,6 +57,10 @@ body {
     cursor: pointer;
   } 
 
+  .redBtn {
+    background-color: #ea331e;
+  }
+
   button.red-btn {
     background-color: #ea331e;
   }
@@ -109,7 +113,8 @@ body {
     text-decoration: line-through;
   }
 
-  .productDetails {
+  .removeBtn {
+    background-color: #ea331e;
   }
 
   .sizes {

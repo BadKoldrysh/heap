@@ -106,13 +106,12 @@ Vue.component('product', {
             <button v-on:click="addToCart" 
                 :disabled="!inStock"
                 :class="{ disabledButton: !inStock, disabledCursor: !inStock }">Add to Cart</button>
-            <button v-on:click="addToCart" 
-                :disabled="!inStock"
-                :class="[ disableCl, disableCl2 ]">Add to Cart</button>
-            
-            <div class="cart">
-                <p>Cart: {{ cart }}</p>
-            </div>
+
+            <button v-on:click="deleteFromCart" 
+                :disabled="cartCount == 0"
+                :class="{ disabledButton: inCart,
+                          redBtn: !inCart }"
+                >Remove</button>
         </div>
     </div>
     `,
@@ -159,6 +158,7 @@ Vue.component('product', {
             selectedVariant: 0,
             disableCl: "disabledButton",
             disableCl2: "disabledCursor",
+            removeBtn: "removeBtn",
             counter: 0,
             cart: 0,
             linkText: "click here, if you can",
@@ -170,8 +170,11 @@ Vue.component('product', {
             this.selectedVariant = index;
         },
         addToCart() {
-            this.cart++;
+            this.$emit("add-to-cart-event", this.variants[this.selectedVariant].variantId);
             this.variants[this.selectedVariant].variantQuantity--;
+        },
+        deleteFromCart() {
+            this.$emit("delete-from-cart", id);
         }
     },
     computed: {
@@ -192,12 +195,19 @@ Vue.component('product', {
         },
         shipping() {
             return this.isUserPremium ? "Free" : "2.99$";
+        },
+        inCart() {
+            return this.cartCount == 0;
         }
     },
     props: {
         isUserPremium: {
             type: Boolean,
-            required: true
+            required: true,
+        },
+        cartCount: {
+            type: Number,
+            required: true,
         },
     },
 });
@@ -206,5 +216,19 @@ var app = new Vue({
     el: '#app',
     data: {
         premiumStatus: true,
+        cart: [],
+    },
+    methods: {
+        updateCart(id) {
+            this.cart.push(id);
+        },
+        deleteFromCart() {
+            this.cart.pop();
+        },
+    },
+    computed: {
+        cartCount() {
+            return this.cart.length;
+        },
     },
 });
