@@ -14,7 +14,12 @@
             <p>Cart: {{ cart.length }}</p>
         </div>
 
-        <product :is-user-premium="premiumStatus" :cart-count="cartCount" @add-to-cart-event="updateCart" @delete-from-cart="deleteFromCart"></product>
+        <product 
+            :is-user-premium="premiumStatus" 
+            :cart-count="cartCount" 
+            @add-to-cart-event="updateCart" 
+            @delete-from-cart="deleteFromCart">
+        </product>
     </div>
     
     <script src="https://unpkg.com/vue"></script>
