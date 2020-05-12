@@ -4,4 +4,4 @@ server/db/tickets.db
 __pycache__/
 *.exe
 php_docker/mysql/data/
-
+php_projects/php_project/vendor/

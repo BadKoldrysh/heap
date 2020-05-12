@@ -1,0 +1,14 @@
+{
+    "name": "koldrysh/test-project",
+    "description": "just a test project",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Kirill Koldrysh",
+            "email": "kirill.koldrysh@redbit.cz"
+        }
+    ],
+    "require": {
+        "ramsey/uuid": "^4.0"
+    }
+}
