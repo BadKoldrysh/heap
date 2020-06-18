@@ -1,10 +1,11 @@
 import Component from "./classes/Component.js";
 import Player from "./classes/Player.js";
+import Villain from "./classes/Villain.js";
 
 const gameArea = {
     canvas: document.createElement("canvas"),
     context: () => this.context,
-    start: function() {
+    start: function () {
         this.canvas.width = 840;
         this.canvas.height = 630;
         this.canvas.setAttribute("id", "gameArea");
@@ -17,16 +18,16 @@ const gameArea = {
             this.updateGameArea();
         }, 20);
     },
-    addObject: function(obj) {
+    addObject: function (obj) {
         this.gameObjects.push(obj);
     },
-    updateGameArea: function() {
+    updateGameArea: function () {
         this.clear();
         this.gameObjects.forEach((o) => {
             o.update();
         })
     },
-    clear: function() {
+    clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     gameObjects: () => this.gameObjects,
@@ -36,57 +37,15 @@ const gameArea = {
 startGame();
 
 function startGame() {
-    const step = 30;
-
     gameArea.start();
-    const hero = new Player(gameArea.context, 30, 30, "#900", 30, 23);
+
+    const hero = new Player(gameArea.context, 30, 30, "#900", 30, 53);
+    window.addEventListener("keydown", function(e) {
+        hero.controller(e);
+    }, false);
     gameArea.addObject(hero);
 
-    const villain = new Component(gameArea.context, 30, 30, "#009", 300, 300);
-
-    villain.pause = 0;
-    villain.steps = 0;
-    villain.stepsLimit = 7;
-    villain.update = function() {
-        if (this.pause < 25) {
-            this.pause++;
-        } else {
-            this.pause = 0;
-            if (this.steps < this.stepsLimit) {
-                this.steps++;
-                this.moveX(step);
-            } else if (this.steps >= this.stepsLimit && this.steps < 2 * this.stepsLimit) {
-                this.steps++;
-                this.moveY(-step);
-            } else if (this.steps >= 2 * this.stepsLimit && this.steps < 3 * this.stepsLimit) {
-                this.steps++;
-                this.moveX(-step);
-            } else if (this.steps >= 3 * this.stepsLimit && this.steps < 4 * this.stepsLimit) {
-                this.steps++;
-                this.moveY(step);
-            } else if (this.steps >= 4 * this.stepsLimit) {
-                this.steps = 0;
-            }
-        }
-
-        this.drawComponent();
-    };
-
+    const villain = new Villain(gameArea.context, 30, 30, "#009", 300, 300);
     gameArea.addObject(villain);
 
-    window.addEventListener("keydown", function(e) {
-        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code) === false) {
-            return;
-        }
-
-        if (e.code === 'ArrowUp') {
-            hero.moveY(-step);
-        } else if (e.code === 'ArrowDown') {
-            hero.moveY(step);
-        } else if (e.code === 'ArrowLeft') {
-            hero.moveX(-step);
-        } else if (e.code === 'ArrowRight') {
-            hero.moveX(step);
-        }
-    }, false);
 }
