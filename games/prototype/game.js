@@ -48,6 +48,9 @@ function startGame() {
     const comp = new Component(gameArea.context, 30, 30, "#090", 60, 300);
     gameArea.addObject(comp);
 
+    const villain = new Villain(gameArea.context, 30, 30, "#009", 300, 300);
+    gameArea.addObject(villain);
+
     const hero = new Player(gameArea.context, 30, 30, "#900", 30, 300);
     hero.checkBordersX = function (step) {
         console.log(hero.leftSide + ' ' + hero.rightSide + ' ' + hero.topSide + ' ' + hero.bottomSide);
@@ -69,8 +72,4 @@ function startGame() {
         hero.controller(e);
     }, false);
     gameArea.addObject(hero);
-
-    const villain = new Villain(gameArea.context, 30, 30, "#009", 300, 300);
-    gameArea.addObject(villain);
-
 }

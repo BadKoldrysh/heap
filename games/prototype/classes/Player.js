@@ -29,7 +29,6 @@ export default class Player extends Component {
         }
 
         this.update = function() {
-            // console.log(this.x);
         }
     }
 }

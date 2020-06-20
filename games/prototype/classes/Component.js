@@ -41,6 +41,8 @@ export default class Component {
             this.rightSide = this.x + this.width;
             this.topSide = this.y;
             this.bottomSide = this.y + this.height;
+
+            this.checkSides();
         };
 
         this.drawComponent = function () {
