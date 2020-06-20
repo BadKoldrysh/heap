@@ -1,7 +1,7 @@
 import Component from "./Component.js";
 
 export default class Villain extends Component {
-    constructor(context, width, height, color, x, y, step) {
+    constructor(context, width, height, color, x, y) {
         super(context, width, height, color, x, y);
 
         this.pause = 0;
@@ -32,7 +32,7 @@ export default class Villain extends Component {
                 }
             }
 
-            this.drawComponent();
+            // this.drawComponent();
         }
     }
 }

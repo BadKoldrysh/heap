@@ -4,18 +4,43 @@ export default class Component {
         this.height = height;
         this.x = x;
         this.y = y;
+        this.leftSide = this.x;
+        this.rightSide = this.x + this.width;
+        this.topSide = this.y;
+        this.bottomSide = this.y + this.height;
         this.color = color;
         this.ctx = context;
 
         this.moveX = function (x) {
-            this.x += x;
+            if (this.checkBordersX(x)) {
+                this.x += x;
+                this.updateBorders();
+            }
         };
         this.moveY = function (y) {
-            this.y += y;
+            if (this.checkBordersY(y)) {
+                this.y += y;
+                this.updateBorders();
+            }
         };
 
+        this.checkBordersX = function (coords) {
+            return true;
+        }
+
+        this.checkBordersY = function (coords) {
+            return true;
+        }
+
         this.update = function () {
-            this.drawComponent();
+
+        };
+
+        this.updateBorders = function () {
+            this.leftSide = this.x;
+            this.rightSide = this.x + this.width;
+            this.topSide = this.y;
+            this.bottomSide = this.y + this.height;
         };
 
         this.drawComponent = function () {

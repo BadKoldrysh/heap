@@ -4,10 +4,10 @@ export default class Player extends Component {
     constructor(context, width, height, color, x, y) {
         super(context, width, height, color, x, y);
 
+        this.image = new Image;
+        this.image.src = './assets/hero.svg';
         this.drawComponent = function () {
-            this.ctx.font = width + "px Arial";
-            this.ctx.fillStyle = this.color;
-            this.ctx.fillText("@", this.x, this.y);
+            this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
         this.controller = function(e) {
@@ -26,6 +26,10 @@ export default class Player extends Component {
             } else if (e.code === 'ArrowRight') {
                 this.moveX(step);
             }
+        }
+
+        this.update = function() {
+            // console.log(this.x);
         }
     }
 }
