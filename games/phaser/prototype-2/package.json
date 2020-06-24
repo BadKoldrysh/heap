@@ -4,7 +4,9 @@
   "description": "phaser 3 game prototype (now with TypeScript)",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
   },
   "author": "BadKoldrysh",
   "license": "ISC",

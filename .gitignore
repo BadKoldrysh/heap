@@ -6,3 +6,4 @@ __pycache__/
 php_docker/mysql/data/
 php_projects/php_project/vendor/
 **/node_modules/
+**/dist/
