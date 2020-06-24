@@ -12,7 +12,7 @@ class Scene extends Phaser.Scene {
             height: params.tileSize
         });
 
-        this.load.svg("enemy", "./../assets/zero.svg", {
+        this.load.svg("zero", "./../assets/zero.svg", {
             width: params.tileSize,
             height: params.tileSize
         });
@@ -25,18 +25,44 @@ class Scene extends Phaser.Scene {
     create() {
         const step = params.tileSize;
 
-        this.player = this.physics.add.sprite((step * 2) + 8, step + 8, "hero");
-        this.enemy = this.physics.add.sprite((step * 50) + 8, (step * 15) + 8, "enemy");
+        // this.player = this.physics.add.sprite((step * 2) + 8, step + 8, "hero");
+        this.player = new Player(this, (step * 2) + 8, step + 8, "hero");
 
-        this.enemy.move = function() {
-            this.x += params.tileSize;
+        this.enemy = this.physics.add.sprite((step * 50) + 8, (step * 15) + 8, "zero");
+        this.wall = this.physics.add.sprite((step * 10) + 8, (step * 7) + 8, "zero");
+
+        this.enemy.move = function () {
+            const steps = 5;
+            if (this.count == 'undefined') {
+                this.count = 0;
+            }
+            if (this.count < steps) {
+                this.x += params.tileSize;
+            } else if (this.count < steps * 2) {
+                this.y -= params.tileSize;
+            } else if (this.count < steps * 3) {
+                this.x -= params.tileSize;
+            } else if (this.count < steps * 4) {
+                this.y += params.tileSize;
+            } else {
+                this.x += params.tileSize;
+                this.count = 0;
+            }
+            this.count++;
         }.bind(this.enemy);
 
-        this.player.setCollideWorldBounds(true);
+        // this.player.setCollideWorldBounds(true);
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.addKeyListeners();
+    }
+
+    update() {
+        this.physics.overlap(this.player, this.wall, function () {
+            this.player.moveBack();
+        }, null, this);
+
     }
 
     addKeyListeners() {
@@ -46,9 +72,9 @@ class Scene extends Phaser.Scene {
     }
 
     doAction(event) {
+        this.player.setPreviousPosition();
         switch (event.keyCode) {
             case Phaser.Input.Keyboard.KeyCodes.SHIFT:
-                console.log("ok");
                 break;
             case Phaser.Input.Keyboard.KeyCodes.UP:
                 this.player.y -= params.tileSize;
@@ -66,6 +92,14 @@ class Scene extends Phaser.Scene {
                 break;
         }
 
+        this.gameTurn();
+    }
+
+    gameTurn() {
         this.enemy.move();
+    }
+
+    touchWall() {
+        console.log("ok");
     }
 }
