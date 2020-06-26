@@ -72,6 +72,7 @@ class Scene extends Phaser.Scene {
     }
 
     doAction(event) {
+        console.log("ok");
         this.player.setPreviousPosition();
         switch (event.keyCode) {
             case Phaser.Input.Keyboard.KeyCodes.SHIFT:
