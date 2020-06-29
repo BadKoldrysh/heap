@@ -1,4 +1,5 @@
 import { params } from "./game";
+import Player from "./Player";
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
     active: false,
@@ -7,8 +8,10 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 };
 
 export default class Scene extends Phaser.Scene {
-    private player;
-    private cursors;
+    private player: Player;
+    private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
+    // private wall: Phaser.Physics.Arcade.Sprite;
+    private wall: Array<Phaser.Physics.Arcade.Sprite>;
 
     constructor() {
         super(sceneConfig);
@@ -20,7 +23,7 @@ export default class Scene extends Phaser.Scene {
             height: params.tileSize
         });
 
-        this.load.svg('zero', './../assets/zero.svg', {
+        this.load.svg('wall', './../assets/wall.svg', {
             width: params.tileSize,
             height: params.tileSize
         });
@@ -29,14 +32,26 @@ export default class Scene extends Phaser.Scene {
     public create() {
         const step: number = params.tileSize;
 
-        this.player = this.physics.add.sprite(step * 5, step * 10, 'hero');
+        this.player = new Player(this, step * 5 + (step / 2), step * 10 + (step / 2), 'hero');
 
         this.cursors = this.input.keyboard.createCursorKeys();
         this.addKeyListener(this.cursors);
+        this.wall = [];
+
+        for (let i = 0; i < 5; i++) {
+            this.wall.push(this.physics.add.sprite((step * (5 + i)) + (step / 2), (step * 7) + (step / 2), 'wall'));
+        }
+        for (let i = 0; i < 5; i++) {
+            this.wall.push(this.physics.add.sprite((step * 9) + (step / 2), (step * (7 + i)) + (step / 2), 'wall'));
+        }
     }
 
     public update() {
-
+        this.wall.forEach(block => {
+            this.physics.overlap(this.player, block, function () {
+                this.player.moveBack();
+            }, null, this);
+        });
     }
 
     private addKeyListener(cursors: Phaser.Types.Input.Keyboard.CursorKeys) {
@@ -45,7 +60,8 @@ export default class Scene extends Phaser.Scene {
         }
     }
 
-    private doAction(event) {
+    private doAction(event: Phaser.Input.Keyboard.Key) {
+        this.player.savePreviousPosition();
         switch (event.keyCode) {
             case Phaser.Input.Keyboard.KeyCodes.SHIFT:
                 break;
