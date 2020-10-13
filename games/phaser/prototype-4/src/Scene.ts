@@ -18,6 +18,7 @@ export default class Scene extends Phaser.Scene {
     }
 
     public preload() {
+        this.load.image('tiles', './../assets/tiles.png');
         this.load.svg('hero', './../assets/hero.svg', {
             width: params.tileSize,
             height: params.tileSize
@@ -27,10 +28,20 @@ export default class Scene extends Phaser.Scene {
             width: params.tileSize,
             height: params.tileSize
         });
+
+        this.load.tilemapCSV('map', './../assets/map.csv');
     }
 
     public create() {
         const step: number = params.tileSize;
+
+        const map = this.make.tilemap({
+            key: 'map',
+            tileWidth: params.tileSize,
+            tileHeight: params.tileSize
+        });
+        const tiles = map.addTilesetImage('tiles');
+        const layer = map.createStaticLayer(0, tiles, 0, 0);
 
         this.player = new Player(this, step * 5 + (step / 2), step * 10 + (step / 2), 'hero');
 
